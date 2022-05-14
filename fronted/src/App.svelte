@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  const endpoint = "http://localhost:1234";
+  const endpoint = `http://${location.hostname}:1234`
   let song = [];
   let display = true;
   setInterval(() => (display = !display), 1000);
@@ -18,7 +18,7 @@
 
 <main>
   <h1>ymp3web</h1>
-  <h3>🟢: {song.ip}</h3>
+  <h3>🟢:{song.ip}</h3>
   <h2>Listening {song.title} By {song.by}</h2>
   <div class="disk">
     <img src={song.img} alt="" />
@@ -27,7 +27,7 @@
     <input type="text" />
   </form>
 
-  <h1>Available songs:</h1>
+  <h2>Available songs:</h2>
   <!--
     Lol
   -->
