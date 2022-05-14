@@ -32,7 +32,6 @@ func Ping(url string) map[string]string {
 	body, _ := ioutil.ReadAll(req.Body)
 	var song CurrentSong
 	json.Unmarshal(body, &song)
-	// return a json
 	return map[string]string{"status": "online", "by": song.By, "url": song.Url, "img": song.Img, "title": song.Title}
 
 }
