@@ -1,0 +1,4 @@
+/fronted/node_modules
+/fronted/public/build
+
+.DS_Store
