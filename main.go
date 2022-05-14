@@ -33,6 +33,9 @@ func Ping(url string) map[string]string {
 	body, _ := ioutil.ReadAll(req.Body)
 	var song CurrentSong
 	json.Unmarshal(body, &song)
+	if song.By == "" && song.Url == "" && song.Img == "" && song.Title == "" {
+		return map[string]string{"status": "online", "by": "unknown", "url": "unknown", "img": "https://media.discordapp.net/attachments/943339279281709100/975065981456109679/question.gif", "title": "unknown"}
+	}
 	return map[string]string{"status": "online", "by": song.By, "url": song.Url, "img": song.Img, "title": song.Title}
 
 }
@@ -61,6 +64,7 @@ func ScanPorts(c echo.Context) error {
 			if err != nil {
 				fmt.Println(err)
 			}
+
 			defer songs.Body.Close()
 			body, _ := ioutil.ReadAll(songs.Body)
 			json.NewEncoder(c.Response()).Encode(map[string]string{"status": "online", "by": status["by"], "url": status["url"], "img": status["img"], "title": status["title"], "ip": "http://" + ip + "." + port + ":8888", "songs": string(body)})

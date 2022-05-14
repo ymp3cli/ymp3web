@@ -2,3 +2,4 @@
 /fronted/public/build
 
 .DS_Store
+*.exe

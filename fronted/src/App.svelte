@@ -2,11 +2,17 @@
   import { onMount } from "svelte";
   const endpoint = "http://localhost:1234";
   let song = [];
+  let display = true;
+  setInterval(() => (display = !display), 1000);
 
   onMount(async () => {
-    const response = await fetch(endpoint);
-    song = await response.json();
-    console.log(song);
+    try {
+      const response = await fetch(endpoint);
+      song = await response.json();
+    } catch (error) {
+      song.ip = "I couldn't find a ymp3cli online instance on your local network, check https://github.com/paij0se/ymp3cli for more info ";
+      song.songs = error
+    }
   });
 </script>
 
@@ -14,21 +20,42 @@
   <h1>ymp3web</h1>
   <h3>🟢: {song.ip}</h3>
   <h2>Listening {song.title} By {song.by}</h2>
-  <img src={song.img} alt="" />
+  <div class="disk">
+    <img src={song.img} alt="" />
+  </div>
+  <form class="number_song">
+    <input type="text" />
+  </form>
+
   <h1>Available songs:</h1>
   <!--
     Lol
   -->
- <p>{song.songs}</p>
+  <p>{song.songs}</p>
 </main>
 
 <style>
+  .disk {
+    animation-name: spin;
+    animation-duration: 50000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
   img {
     width: 200px;
     height: 200px;
     margin: 5px;
     border-radius: 50%;
-    border: 1px solid black;
+    border: 2px solid black;
     display: inline-block;
     box-shadow: 0px 0px 5px black;
   }
