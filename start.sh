@@ -1,1 +1,2 @@
-go run main.go & cd fronted ; npm run dev
+go build main.go
+./main & cd fronted ; npm start
