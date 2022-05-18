@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  const endpoint = `http://${location.hostname}:1234`
+  const endpoint = `http://${location.hostname}:1234`;
   let song = [];
   let display = true;
   setInterval(() => (display = !display), 1000);
@@ -10,8 +10,9 @@
       const response = await fetch(endpoint);
       song = await response.json();
     } catch (error) {
-      song.ip = "I couldn't find a ymp3cli online instance on your local network, check https://github.com/paij0se/ymp3cli for more info ";
-      song.songs = error
+      song.ip =
+        "I couldn't find a ymp3cli online instance on your local network, check https://github.com/paij0se/ymp3cli for more info ";
+      song.songs = error;
     }
   });
 </script>
@@ -64,6 +65,7 @@
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
+    background-color: #3f4549;
   }
 
   h1 {
@@ -72,8 +74,9 @@
     font-size: 4em;
     font-weight: 900;
   }
-  h3 {
-    color: #000;
+  h3,
+  p {
+    color: #fff;
     font-weight: 900;
   }
   h2 {

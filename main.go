@@ -22,7 +22,7 @@ type CurrentSong struct {
 
 func Ping(url string) map[string]string {
 	client := http.Client{
-		Timeout: 5 * 1e6, // 5 ms timeout
+		Timeout: 40 * 1e6, // Timeout per request in ms
 	}
 	req, err := client.Get(url)
 
@@ -58,8 +58,7 @@ func ScanPorts(c echo.Context) error {
 		fmt.Println(url)
 		status := Ping(url)
 		if status["status"] == "online" {
-			fmt.Println("ymp3cli-ports, port " + port + " is online")
-			fmt.Println(status)
+			fmt.Println("port " + port + " is online")
 			songs, err := http.Get("http://" + ip + "." + port + ":8888/songs")
 			if err != nil {
 				fmt.Println(err)
