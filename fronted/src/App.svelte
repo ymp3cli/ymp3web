@@ -76,7 +76,6 @@
     padding: 1em;
     max-width: 240px;
     margin: 0 auto;
-    background-color: #3f4549;
   }
 
   h1 {
@@ -86,7 +85,7 @@
   }
   h3,
   p {
-    color: #fff;
+    color: #000;
     font-weight: 900;
   }
   h2 {
