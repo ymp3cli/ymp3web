@@ -3,6 +3,8 @@
   const endpoint = `http://${location.hostname}:1234`;
   let song = [];
   let display = true;
+  let result = null;
+  let nsong = 20;
   setInterval(() => (display = !display), 1000);
 
   onMount(async () => {
@@ -15,6 +17,17 @@
       song.songs = error;
     }
   });
+  async function doPost() {
+    const res = await fetch(`${song.ip}/y`, {
+      method: "POST",
+      body: JSON.stringify({
+        nsong,
+      }),
+    });
+    const json = await res.json();
+    result = JSON.stringify(json);
+    console.log(result);
+  }
 </script>
 
 <main>
@@ -24,10 +37,8 @@
   <div class="disk">
     <img src={song.img} alt="" />
   </div>
-  <form class="number_song">
-    <input type="text" />
-  </form>
-
+  <input bind:value={nsong} />
+  <button type="button" on:click={doPost}> Listen a song </button>
   <h2>Available songs:</h2>
   <!--
     Lol
@@ -71,7 +82,6 @@
   h1 {
     color: #ffb5da;
     text-transform: uppercase;
-    font-size: 4em;
     font-weight: 900;
   }
   h3,
